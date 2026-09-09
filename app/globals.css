@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+:root {
+  --canvas: #F7F7F5;
+  --ink: #14171A;
+  --body: #3F4753;
+  --hairline: #D8D8D3;
+  --hairline-strong: #B9BAB4;
+
+  /* Restrained semantic palette — one accent owned per cohort */
+  --deep-blue: #1E3A5F;
+  --muted-red: #9B3B3B;
+  --forest-green: #2F5D46;
+  --amber: #B4791F;
+  --violet: #4A3B6B;
+
+  --accent: var(--deep-blue); /* overridden per-cohort via [data-cohort] */
+}
+
+[data-cohort="hr"]         { --accent: var(--deep-blue); }
+[data-cohort="neuropsych"] { --accent: var(--violet); }
+[data-cohort="clinical"]   { --accent: var(--muted-red); }
+[data-cohort="educational"]{ --accent: var(--amber); }
+[data-cohort="health"]     { --accent: var(--forest-green); }
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-ink: var(--ink);
+  --color-body: var(--body);
+  --color-hairline: var(--hairline);
+  --color-accent: var(--accent);
+  --color-deep-blue: var(--deep-blue);
+  --color-muted-red: var(--muted-red);
+  --color-forest-green: var(--forest-green);
+  --color-amber: var(--amber);
+  --color-violet: var(--violet);
+  --font-display: var(--font-space-grotesk);
+  --font-body: var(--font-inter);
+  --font-mono: var(--font-plex-mono);
+}
+
+* {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+html, body {
+  background-color: var(--canvas);
+  color: var(--body);
+  background-image:
+    linear-gradient(to right, rgba(20, 23, 26, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20, 23, 26, 0.055) 1px, transparent 1px);
+  background-size: 28px 28px;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display), system-ui, sans-serif;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.font-mono-label {
+  font-family: var(--font-mono), monospace;
+}
+
+::selection {
+  background: var(--accent);
+  color: #FFFFFF;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Shared whiteboard primitives — reused across every cohort page */
+.panel {
+  background: #FFFFFF;
+  border: 1px solid var(--hairline);
+  border-radius: 2px;
+}
+
+.eyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+}
+
+.micro-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #6B7280;
+}
+
+.rule {
+  height: 1px;
+  background: var(--hairline);
+}
+
+.stat-num {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.slide {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 6rem 1.75rem;
+  border-bottom: 1px solid var(--hairline);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .slide { padding: 6rem 4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
